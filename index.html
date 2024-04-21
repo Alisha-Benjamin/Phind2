@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .like-button {
+            cursor: pointer;
+            color: #000; /* Updated color for better contrast */
+        }
+    </style>
+</head>
+<body>
+    <label for="commentInput">Add a comment:</label>
+    <textarea id="commentInput" placeholder="Add a comment..."></textarea>
+    <span class="like-button" onclick="toggleLike()">❤️</span>
+</body>
+</html>
