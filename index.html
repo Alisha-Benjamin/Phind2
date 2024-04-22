@@ -3,54 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Web Page</title>
+    <title>Social Media Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
+       body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
 
-        .like-button {
-            cursor: pointer;
-            color: #000; /* Updated color for better contrast */
-        }
+.like-button {
+    cursor: pointer;
+    color: #000; /* Updated color for better contrast */
+}
 
-        .like-button.liked {
-            color: red;
-        }
+.like-button.liked {
+    color: red;
+}
 
-        .footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
-        .footer a {
-            color: #fff;
-            margin: 0 10px;
-            text-decoration: none;
-        }
+.footer a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
     </style>
 </head>
 <body>
-    <label for="commentInput">Add a comment:</label>
-    <textarea id="commentInput" placeholder="Add a comment..."></textarea>
-    <span class="like-button" onclick="toggleLike()">❤️</span>
-    <div class="footer">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+    <div class="container">
+        <img class="photo" src="your-photo-url.jpg" alt="Photo">
+        <div>
+            <span class="like-button" onclick="toggleLike()">❤️</span>
+            <span id="likeCount">0</span> Likes
+            <span id="commentCount">0</span> Comments
+        </div>
+        <div>
+            <label for="commentInput">Add a comment:</label>
+<textarea id="commentInput" placeholder="Add a comment..."></textarea>
+        </div>
+        <div id="commentsSection"></div>
     </div>
+    <div class="footer">
+        <p>&copy; 2024 Your Social Media Page</p>
+        <a href="https://twitter.com">Twitter</a> | <a href="https://instagram.com">Instagram</a>
+    </div>
+
     <script>
+        let likes = 0;
+        let comments = [];
+
         function toggleLike() {
-            var likeButton = document.querySelector('.like-button');
-            likeButton.classList.toggle('liked');
+            const likeButton = document.querySelector('.like-button');
+            if (likeButton.classList.contains('liked')) {
+                likes--;
+                likeButton.classList.remove('liked');
+            } else {
+                likes++;
+                likeButton.classList.add('liked');
+            }
+            document.getElementById('likeCount').textContent = likes;
+        }
+
+        function addComment() {
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput.value.trim();
+            if (commentText) {
+                comments.push(commentText);
+                commentInput.value = '';
+                updateComments();
+            }
+        }
+
+        function updateComments() {
+            const commentsSection = document.getElementById('commentsSection');
+            commentsSection.innerHTML = '';
+            comments.forEach(comment => {
+                const commentElement = document.createElement('p');
+                commentElement.textContent = comment;
+                commentsSection.appendChild(commentElement);
+            });
+            document.getElementById('commentCount').textContent = comments.length;
         }
     </script>
 </body>
